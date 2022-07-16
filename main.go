@@ -23,10 +23,6 @@ func main() {
         *outFlag = strings.ReplaceAll(*outFlag, "~", usr.HomeDir)
     }
 
-    if *ftpFlag {
-        remote.DownloadThemesAndPlugins(*outFlag + "/wp")
-    }
-
     if _, err := os.Stat(*outFlag); os.IsNotExist(err) {
         os.Mkdir(*outFlag, fs.FileMode(0755))
     }
