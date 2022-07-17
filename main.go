@@ -3,14 +3,15 @@ package main
 import (
 	"flag"
 	"io/fs"
+	"log"
 	"os"
 	"os/user"
 	"strings"
 
 	"github.com/rhermens/wp-docker-clone/docker"
-	"github.com/rhermens/wp-docker-clone/wordpress"
-	"github.com/rhermens/wp-docker-clone/remote"
 	"github.com/rhermens/wp-docker-clone/pma"
+	"github.com/rhermens/wp-docker-clone/remote"
+	"github.com/rhermens/wp-docker-clone/wordpress"
 )
 
 func main() {
@@ -30,7 +31,7 @@ func main() {
     }
 
     if err := os.Chdir(*outFlag); err != nil {
-        panic(err)
+        log.Fatalf("Cannot chdir to %s", *outFlag)
     }
 
     composeFile := docker.NewDockerCompose()
@@ -51,5 +52,7 @@ func main() {
 
         ftpCnf.Close()
     }
+
+    log.Printf("Created project in %s. Happy hacking", *outFlag)
 }
 

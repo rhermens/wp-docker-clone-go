@@ -2,6 +2,7 @@ package docker
 
 import (
 	"io/fs"
+	"log"
 	"os"
 
 	yaml "gopkg.in/yaml.v3"
@@ -34,7 +35,7 @@ func (y DockerCompose) Store() {
 
     err = os.WriteFile("docker-compose.yml", out, fs.FileMode(0644))
     if err != nil {
-        panic(err)
+        log.Fatal("Cannot write docker-compose.yml")
     }
 }
 
