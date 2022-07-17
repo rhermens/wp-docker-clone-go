@@ -18,10 +18,10 @@ jobs:
         go-version: 1.18
 
     - name: Build
-      run: go build -v ./main.go
+      run: go build -v
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
         name: wp-docker-clone
         path: wp-docker-clone
-        error: Artifact not uploaded
+        if-no-files-found: error
