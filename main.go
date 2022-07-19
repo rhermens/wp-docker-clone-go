@@ -15,11 +15,22 @@ import (
 )
 
 func main() {
+    helpFlag := flag.Bool("h", false, "Show help")
     remoteFlag := flag.Bool("remote", false, "Download wp-content")
     dumpFlag := flag.String("dumpfile", "", "MySQL Dump file")
     pmaFlag := flag.Bool("pma", true, "Use PhpMyAdmin")
-    outFlag := flag.String("o", ".", "Out directory")
+    outFlag := flag.String("o", "", "Out directory")
     flag.Parse()
+
+    if *helpFlag {
+        flag.PrintDefaults()
+        os.Exit(0)
+    }
+
+    if *outFlag == "" {
+        flag.PrintDefaults()
+        log.Fatal("-o is required")
+    }
 
     if strings.Contains(*outFlag, "~") {
         usr, _ := user.Current()
